@@ -1,0 +1,28 @@
+<html><head></head><body><div class="main-container">
+    <mat-toolbar color="primary" class="topbar telative">
+        <div class="navbar-header">
+            <button mat-icon-button="" (click)="snav.toggle()" value="sidebarclosed" style="vertical-align: bottom;">
+                <mat-icon>menu</mat-icon>
+            </button><b>
+                <span style="vertical-align: middle;">
+                    <mat-icon>storefront</mat-icon>
+                </span>
+            </b>
+            <span fxshow="false" fxshow.gt-xs="">
+                Cafe Management System
+            </span>
+        </div>
+        <span fxflex=""></span>
+        <app-header></app-header>
+    </mat-toolbar>
+    <mat-sidenav-container class="example-sidenav-container" [style.margintop.px]="mobileQuery.matches ? 0 : 0">
+        <mat-sidenav #snav="" id="snav" class="dark-sidebar pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'" fixedtopgap="0" [opened]="mobileQuery.matches" [disableclose]="mobileQuery.matches">
+            <app-sidebar></app-sidebar>
+        </mat-sidenav>
+        <mat-sidenav-content class="page-wrapper">
+            <div class="page-content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div></body></html>

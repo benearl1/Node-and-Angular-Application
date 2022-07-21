@@ -1,0 +1,42 @@
+<mat-card>
+    <b><span>Manage Category</span></b>
+    <button mat-flat-button color="primary" class="float-right" (click)="handleAddAction()">
+        Add Category
+    </button>
+</mat-card>
+
+<hr>
+
+<mat-card>
+    <mat-form-fiel appearance="fill">
+        <mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input>
+        </mat-label>
+    </mat-form-fiel>
+</mat-card>
+<hr>
+<divc class="responsive-table">
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCallDef>Name</th>
+            <td mat-cell *mattCellDef="let element">{{element.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCallDef>Action</th>
+            <td mat-cell *mattCellDef="let element" class="action-link">
+                <button mat-icon-button color="primary" matTooltips="Edit" (click)="handleEditAction()">
+                    <mat-item>
+                        Edit
+                    </mat-item>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowData="displayColumns; sticky:true">
+
+        </tr>
+        <tr mat-row *matRowDef="let row: columns:displayColumns">
+
+        </tr>
+    </table>
+    </div>
