@@ -1,0 +1,35 @@
+
+<mat-toolbar color = "primary">
+    <mat-toolbar-row fxLayout = "row">
+        <span class = "title-center">Forgot Password</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-dialog-content class = "mat-typography">
+    <form [formGroup] = "loginForms">
+        <div fxFlex fxLayout = "column">
+            <mat-form-field appearance = "fill" fxFlex>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName = "email" required>
+                <mat-error *ngIf = "loginForms.controls.email.touched && loginForms.controls.email.invalid">
+                    <span *ngIf = "loginForms.controls.emial.error.required">This field is required</span>
+                    <span *ngIf = "loginForms.controls.email.error.pattern"> This field is invalid</span>
+                </mat-error>
+            </mat-form-field>
+
+            
+            <mat-form-field appearance = "fill" fxFlex>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName = "password" type="password" required>
+                <mat-error *ngIf = "loginForms.controls.password.touched && loginForms.controls.password.invalid">
+                    <span *ngIf = "loginForms.controls.password.error.required">This field is required</span>
+                    <span *ngIf = "loginForms.controls.password.error.pattern"> This field is invalid</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align = "center">
+    <button  mat-raised-button colors = "primary" type = "submit" (click) = "handleSubmit()"
+    [disabled] = "!(loginForms.valid && loginForms.dirty)">Login</button>
+    <button mat-raised-button colors = "primary"  mat-dialog-close> Close</button>
+</mat-dialog-actions>
