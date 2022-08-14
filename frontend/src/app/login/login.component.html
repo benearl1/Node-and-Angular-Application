@@ -11,7 +11,7 @@
                 <mat-label>Email</mat-label>
                 <input matInput formControlName = "email" required>
                 <mat-error *ngIf = "loginForms.controls.email.touched && loginForms.controls.email.invalid">
-                    <span *ngIf = "loginForms.controls.emial.error.required">This field is required</span>
+                    <span *ngIf = "loginForms.controls.email.error.required">This field is required</span>
                     <span *ngIf = "loginForms.controls.email.error.pattern"> This field is invalid</span>
                 </mat-error>
             </mat-form-field>
