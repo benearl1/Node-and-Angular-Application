@@ -11,7 +11,7 @@ export class AuthService {
 
 public isAuthenticated(): boolean{
   const token = localStorage.getItem('token')
-  if(token){
+  if(!token){
     this.rotuer.navigate(["/"])
     return false
   }
