@@ -20,6 +20,12 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    /*
+    check if token exists in the local storage
+    this if statement is if there is no token
+    != null means token exists
+
+    */
     if(localStorage.getItem('token') != null){
      this.userService.checkToken().subscribe((response:any)=>{
       this.router.navigate(['/cafe/dashboard'])
