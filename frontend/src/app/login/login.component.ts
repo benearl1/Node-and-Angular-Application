@@ -23,6 +23,12 @@ responseMessage:any;
     private router: Router) { }
 
   ngOnInit(): void {
+    
+    /*
+Login error (401) will appear if login credentials are wrong
+If login is correct, token will appear in the application window of the inspect page
+
+    */
     this.loginForms = this.formBuilder.group({
       email:[null,[Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
       password: [null,[Validators.required]]
