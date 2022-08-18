@@ -50,7 +50,7 @@
                         <mat-option value="Debit Card">Debit Card</mat-option>
                     </mat-select>
                     <mat-error
-                        *ngIf="manageOrderForm.controls.paymentMethod.touched && manageOrderForm.paymentMethod.contact.invalid">
+                        *ngIf="manageOrderForm.controls.paymentMethod.touched && manageOrderForm.controls.paymentMethod.invalid">
                         <span *ngIf="manageOrderForm.controls.paymentMethod.errors.required">This field is
                             required</span>
                         <span *ngIf="manageOrderForm.controls.paymentMethod.errors.pattern">This field is invalid</span>
@@ -107,9 +107,9 @@
                 <mat-form-field appearance="fill" fxFlex>
                     <mat-label>Total</mat-label>
                     <input matInput formControlName="total" required readonly>
-                    <mat-error *ngIf="manageOrderForm.total.quantity.touched && manageOrderForm.total.quantity.invalid">
-                        <span *ngIf="manageOrderForm.total.quantity.errors.required">This field is required</span>
-                        <span *ngIf="manageOrderForm.total.quantity.errors.pattern">This field is invalid</span>
+                    <mat-error *ngIf="manageOrderForm.controls.total.touched && manageOrderForm.controls.total.invalid">
+                        <span *ngIf="manageOrderForm.controls.total.errors.required">This field is required</span>
+                        <span *ngIf="manageOrderForm.controls.total.errors.pattern">This field is invalid</span>
                     </mat-error>
                 </mat-form-field>
             </div>

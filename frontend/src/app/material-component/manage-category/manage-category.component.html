@@ -33,7 +33,7 @@
                 </button>
             </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowData="displayColumns; sticky:true">
+        <tr mat-header-row *matHeaderRowDef="displayColumns; sticky:true">
 
         </tr>
         <tr mat-row *matRowDef="let row; columns:displayColumns">

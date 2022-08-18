@@ -19,10 +19,10 @@ export class ManageOrderComponent implements OnInit {
   manageOrderForm: any = FormGroup;
   categorys: any = [];
   products: any = [];
-   price: any;
+  price: any;
   totalAmoung: number = 0;
   responseMessage: any;
-  constructor(private formBuiler: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private categoryService: CategoryService,
     private productService: ProductService,
     private snackBar: SnackbarService,
@@ -32,7 +32,7 @@ export class ManageOrderComponent implements OnInit {
   ngOnInit(): void {
     this.ngxService.start();
     this.getCategory();
-    this.manageOrderForm = this.formBuiler.group({
+    this.manageOrderForm = this.formBuilder.group({
       name: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
       contact: [null, [Validators.required, Validators.pattern(GlobalConstants.contactNumberRegex)]],
@@ -63,9 +63,9 @@ export class ManageOrderComponent implements OnInit {
   getProductsByCategory(value: any) {
     this.productService.getProductsByCategory(value.id).subscribe((response: any) => {
       this.products = response;
-      this.manageOrderForm.contorls['price'].setValue('');
-      this.manageOrderForm.contorls['quantity'].setValue('');
-      this.manageOrderForm.contorls['total'].setValue(0);
+      this.manageOrderForm.controls['price'].setValue('');
+      this.manageOrderForm.controls['quantity'].setValue('');
+      this.manageOrderForm.controls['total'].setValue(0);
     }, (error: any) => {
       this.ngxService.stop();
       if (error.error?.message) {
@@ -79,9 +79,9 @@ export class ManageOrderComponent implements OnInit {
   getProductDetails(value: any) {
     this.productService.getById(value.id).subscribe((response: any) => {
       this.price = response.price;
-      this.manageOrderForm.contorls['price'].setValue(response.price);
-      this.manageOrderForm.contorls['quantity'].setValue('1');
-      this.manageOrderForm.contorls['total'].setValue(this.price * 1);
+      this.manageOrderForm.controls['price'].setValue(response.price);
+      this.manageOrderForm.controls['quantity'].setValue('1');
+      this.manageOrderForm.controls['total'].setValue(this.price * 1);
     }, (error: any) => {
       this.ngxService.stop();
       if (error.error?.message) {
@@ -94,19 +94,19 @@ export class ManageOrderComponent implements OnInit {
   }
 
   setQuantity(value: any) {
-    var temp = this.manageOrderForm.contorls['quantity'].value
+    var temp = this.manageOrderForm.controls['quantity'].value
     if (temp > 0) {
-      this.manageOrderForm.contorls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.contorls['price'].value);
+      this.manageOrderForm.controls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.controls['price'].value);
 
     } else if (temp != '') {
-      this.manageOrderForm.contorls['quantity'].setValue('1');
-      this.manageOrderForm.contorls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.contorls['price'].value);
+      this.manageOrderForm.controls['quantity'].setValue('1');
+      this.manageOrderForm.controls['total'].setValue(this.manageOrderForm.controls['quantity'].value * this.manageOrderForm.controls['price'].value);
     }
 
   }
 
   validateProductsAdd() {
-    if (this.manageOrderForm.conrtols['total'].value === 0 || this.manageOrderForm.contorls['total'].value === null || this.manageOrderForm.contorls['quantity'].value <= 0) {
+    if (this.manageOrderForm.controls['total'].value === 0 || this.manageOrderForm.contorls['total'].value === null || this.manageOrderForm.controls['quantity'].value <= 0) {
       return true;
     } else {
       return false
@@ -131,7 +131,7 @@ export class ManageOrderComponent implements OnInit {
       this.totalAmoung = this.totalAmoung + formData.total
       this.dataSource.push({
         id: formData.product.id, name: formData.product.name, category: formData.category.name,
-        quantity: formData.quantity, price: formData.price.price, total: formData.total
+        quantity: formData.quantity, price: formData.price, total: formData.total
       })
       this.dataSource =[...this.dataSource]
       this.snackBar.openSnackBar(GlobalConstants.productAdded,"success");
@@ -142,7 +142,7 @@ export class ManageOrderComponent implements OnInit {
 
   handleDeleteAction(value:any,element:any){
 this.totalAmoung = this.totalAmoung -element.total;
-this.dataSource.splic(value,1);
+this.dataSource.splice(value,1);
 this.dataSource = [...this.dataSource];
   }
 
